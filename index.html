@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feliz Día de las Madres - Elizabeth ❤️</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap');
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root { --rose: #c2185b; --pink: #f06292; --light-pink: #fce4ec; --gold: #ffd54f; --cream: #fff8f0; --dark: #4a1a2c; --text: #3d1a2b; }
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+}
+
+h1, h2, h3 { font-family: 'Playfair Display', serif; }
+
+/* ========== LOADER ========== */
+#loader {
+    position: fixed; inset: 0; z-index: 1000;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: var(--cream);
+}
+#loader .logo { font-size: 60px; margin-bottom: 20px; }
+#loader h2 { font-size: 1.8rem; color: var(--rose); font-weight: 400; letter-spacing: 2px; }
+#loader .loader-bar-wrap {
+    width: 260px; height: 4px; background: #f0d4dc; border-radius: 4px; overflow: hidden; margin-top: 30px;
+}
+#loader .loader-bar {
+    height: 100%; width: 0%; background: linear-gradient(90deg, var(--pink), var(--rose));
+    border-radius: 4px;
+}
+#loader .loader-pct { margin-top: 12px; font-size: 0.85rem; color: #b07a8a; letter-spacing: 3px; }
+
+/* ========== FLOATING ELEMENTS (bg) ========== */
+.floating-el {
+    position: fixed; pointer-events: none; z-index: 0; opacity: 0.5;
+}
+
+/* ========== HERO ========== */
+.hero {
+    position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 40%, #f48fb1 70%, #f06292 100%);
+    background-size: 300% 300%; overflow: hidden;
+}
+.hero::after {
+    content: ''; position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.4;
+}
+.hero-content { text-align: center; z-index: 1; padding: 20px; }
+.hero-content .small-text {
+    font-size: 0.9rem; text-transform: uppercase; letter-spacing: 6px; color: rgba(255,255,255,0.7);
+    margin-bottom: 20px; font-weight: 300;
+}
+.hero-content .hero-title-wrap { overflow: hidden; }
+.hero-content .hero-title-wrap h1 {
+    font-size: clamp(2.5rem, 8vw, 6rem); color: white; line-height: 1.1;
+}
+.hero-content .hero-sub-wrap { overflow: hidden; }
+.hero-content .hero-sub-wrap h2 {
+    font-size: clamp(1.2rem, 3vw, 2.2rem); color: rgba(255,255,255,0.85);
+    font-family: 'Inter', sans-serif; font-weight: 300; font-style: italic;
+}
+.hero-content .hero-icon { font-size: 70px; margin-top: 30px; display: inline-block; }
+.hero-scroll-indicator {
+    position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+    color: rgba(255,255,255,0.6); font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;
+    cursor: pointer;
+}
+
+/* ========== SECTION BASE ========== */
+section { position: relative; z-index: 1; }
+
+/* ========== MESSAGE SECTION ========== */
+.message-section {
+    padding: 120px 20px; background: var(--cream);
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+}
+.message-section .container { max-width: 800px; width: 100%; }
+
+.msg-label {
+    display: inline-block; padding: 8px 28px; background: var(--rose); color: white;
+    border-radius: 50px; font-size: 0.85rem; letter-spacing: 3px; text-transform: uppercase;
+    margin-bottom: 30px;
+}
+.msg-title { font-size: clamp(2rem, 5vw, 3.5rem); color: var(--dark); line-height: 1.2; margin-bottom: 8px; }
+.msg-title em { color: var(--rose); font-style: italic; }
+.msg-highlight {
+    display: inline-block; background: linear-gradient(135deg, var(--pink), var(--rose));
+    color: white; padding: 6px 30px; border-radius: 10px;
+    font-size: clamp(1.5rem, 3vw, 2.5rem); margin: 15px 0;
+}
+.msg-text { font-size: 1.15rem; line-height: 1.9; color: #5d3a4a; max-width: 600px; margin: 25px auto 0; }
+.msg-text strong { color: var(--rose); }
+
+/* ========== QUALITIES SECTION ========== */
+.qualities-section {
+    padding: 100px 20px; background: linear-gradient(180deg, var(--cream) 0%, #fce4ec 100%);
+    text-align: center;
+}
+.qualities-section .container { max-width: 1200px; margin: 0 auto; }
+
+.qualities-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px; margin-top: 60px;
+}
+.quality-card {
+    background: white; border-radius: 24px; padding: 40px 25px;
+    box-shadow: 0 10px 40px rgba(194, 24, 91, 0.08);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.quality-card:hover {
+    transform: translateY(-8px) !important;
+    box-shadow: 0 20px 60px rgba(194, 24, 91, 0.15);
+}
+.quality-card .icon { font-size: 48px; margin-bottom: 20px; display: block; }
+.quality-card h3 { font-size: 1.5rem; color: var(--rose); margin-bottom: 10px; }
+.quality-card p { font-size: 0.95rem; line-height: 1.6; color: #6d4a5a; }
+
+/* ========== GALLERY / MOMENTS ========== */
+.moments-section {
+    padding: 120px 20px; background: var(--cream); text-align: center; overflow: hidden;
+}
+.moments-section .container { max-width: 900px; margin: 0 auto; }
+.moments-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 50px; }
+
+.moment-item {
+    aspect-ratio: 1; border-radius: 20px; display: flex; align-items: center; justify-content: center;
+    font-size: 60px; background: #fce4ec;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    box-shadow: 0 5px 25px rgba(194, 24, 91, 0.06);
+}
+.moment-item:hover { transform: scale(1.05) !important; box-shadow: 0 15px 45px rgba(194,24,91,0.15); }
+.moment-item:nth-child(1) { background: linear-gradient(135deg, #fce4ec, #f8bbd0); }
+.moment-item:nth-child(2) { background: linear-gradient(135deg, #fff3e0, #ffe0b2); }
+.moment-item:nth-child(3) { background: linear-gradient(135deg, #e8f5e9, #c8e6c9); }
+.moment-item:nth-child(4) { background: linear-gradient(135deg, #fff8e1, #ffecb3); }
+.moment-item:nth-child(5) { background: linear-gradient(135deg, #f3e5f5, #e1bee7); }
+.moment-item:nth-child(6) { background: linear-gradient(135deg, #fce4ec, #f48fb1); }
+
+/* ========== FINAL SECTION ========== */
+.final-section {
+    padding: 140px 20px; text-align: center;
+    background: linear-gradient(135deg, #f06292, #c2185b, #880e4f);
+    background-size: 300% 300%; position: relative; overflow: hidden;
+}
+.final-section::before {
+    content: ''; position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.final-section .container { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+.final-section .big-icon { font-size: 80px; display: block; margin-bottom: 20px; }
+.final-section h2 { font-size: clamp(2rem, 5vw, 3.5rem); color: white; margin-bottom: 25px; }
+.final-section p { font-size: 1.2rem; line-height: 1.8; color: rgba(255,255,255,0.85); margin-bottom: 30px; }
+.final-section .btn-love {
+    display: inline-block; padding: 18px 50px; background: white; color: var(--rose);
+    border: none; border-radius: 50px; font-size: 1.1rem; font-family: 'Playfair Display', serif;
+    cursor: pointer; transition: all 0.3s ease; box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+}
+.final-section .btn-love:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 12px 40px rgba(0,0,0,0.2); }
+
+/* ========== FOOTER ========== */
+footer {
+    padding: 40px 20px; text-align: center; background: var(--dark); color: rgba(255,255,255,0.5);
+    font-size: 0.85rem; letter-spacing: 1px;
+}
+
+/* ========== CONFETTI OVERLAY ========== */
+.confetti-piece {
+    position: fixed; width: 10px; height: 10px; top: -20px;
+    pointer-events: none; z-index: 999;
+    animation: confettiFall linear forwards;
+}
+@keyframes confettiFall {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(1080deg); opacity: 0; }
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+    .moments-grid { grid-template-columns: repeat(2, 1fr); }
+    .qualities-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+}
+@media (max-width: 480px) {
+    .qualities-grid { grid-template-columns: 1fr; }
+    .moments-grid { grid-template-columns: 1fr 1fr; }
+    .message-section { padding: 80px 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== LOADER ==================== -->
+<div id="loader">
+    <div class="logo">💐</div>
+    <h2>Elizabeth</h2>
+    <div class="loader-bar-wrap"><div class="loader-bar" id="loaderBar"></div></div>
+    <div class="loader-pct" id="loaderPct">0%</div>
+</div>
+
+<!-- ==================== MAIN CONTENT ==================== -->
+<div id="smooth-content">
+
+<!-- HERO -->
+<section class="hero" id="hero">
+    <div class="hero-content">
+        <div class="small-text" id="heroSmall">💕 Para la mejor mamá del mundo</div>
+        <div class="hero-title-wrap"><h1 id="heroTitle">Feliz Día de las</h1></div>
+        <div class="hero-title-wrap"><h1 id="heroTitle2">Madres, Mamá ❤️</h1></div>
+        <div class="hero-sub-wrap"><h2 id="heroSub">Elizabeth — eres mi mayor inspiración</h2></div>
+        <div class="hero-icon" id="heroIcon">🌹</div>
+    </div>
+    <div class="hero-scroll-indicator" id="scrollIndicator" onclick="document.getElementById('message').scrollIntoView({behavior:'smooth'})">
+        Descubre &darr;
+    </div>
+</section>
+
+<!-- MESSAGE -->
+<section class="message-section" id="message">
+    <div class="container">
+        <span class="msg-label" id="msgLabel">Para ti, mamá</span>
+        <h2 class="msg-title" id="msgTitle1">Gracias por cada</h2>
+        <div class="msg-highlight" id="msgHighlight">sonrisa, abrazo y enseñanza</div>
+        <h2 class="msg-title" id="msgTitle2" style="margin-top:8px;">que me has dado <em>con todo tu corazón</em></h2>
+        <div class="msg-text" id="msgText">
+            <p>No hay palabras suficientes para agradecerte todo lo que haces por mí. Tu amor incondicional, tu fortaleza y tu ternura son el regalo más grande que la vida me ha dado.</p>
+            <p style="margin-top:15px;"><strong>Eres única, eres increíble, eres mi mamá. ¡Te amo, Elizabeth! ❤️</strong></p>
+        </div>
+    </div>
+</section>
+
+<!-- QUALITIES -->
+<section class="qualities-section" id="qualities">
+    <div class="container">
+        <span class="msg-label" id="qlabel">Lo que hace especial a Elizabeth</span>
+        <h2 class="msg-title" id="qtitle" style="color:var(--dark);">Razones por las que <em style="color:var(--rose);">te amo</em></h2>
+        <div class="qualities-grid" id="qualitiesGrid">
+            <div class="quality-card"><div class="icon">❤️</div><h3>Amor Incondicional</h3><p>Siempre estás ahí, pase lo que pase, con los brazos abiertos y el corazón lleno de amor.</p></div>
+            <div class="quality-card"><div class="icon">💪</div><h3>Fortaleza</h3><p>Has enfrentado cada reto con una valentía que me inspira todos los días a ser mejor.</p></div>
+            <div class="quality-card"><div class="icon">🌷</div><h3>Dulzura</h3><p>Tu ternura y tu forma de cuidar cada detalle hacen del mundo un lugar más hermoso.</p></div>
+            <div class="quality-card"><div class="icon">🌟</div><h3>Sabiduría</h3><p>Tus consejos y tu manera de ver la vida son mi guía. Siempre tienes la palabra perfecta.</p></div>
+            <div class="quality-card"><div class="icon">🎶</div><h3>Alegría</h3><p>Tu risa es contagiosa y tu energía ilumina hasta el día más gris. Eres luz pura.</p></div>
+            <div class="quality-card"><div class="icon">🤗</div><h3>Generosidad</h3><p>Das todo sin esperar nada a cambio. Tu corazón enorme es tu mejor cualidad.</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- MOMENTS -->
+<section class="moments-section" id="moments">
+    <div class="container">
+        <span class="msg-label" id="mlabel">Momentos</span>
+        <h2 class="msg-title" id="mtitle" style="color:var(--dark);">Pequeños recuerdos, <em style="color:var(--rose);">grandes sonrisas</em></h2>
+        <div class="moments-grid" id="momentsGrid">
+            <div class="moment-item">🌅</div>
+            <div class="moment-item">🌸</div>
+            <div class="moment-item">🍰</div>
+            <div class="moment-item">🌺</div>
+            <div class="moment-item">☕</div>
+            <div class="moment-item">💐</div>
+        </div>
+    </div>
+</section>
+
+<!-- FINAL -->
+<section class="final-section" id="final">
+    <div class="container">
+        <span class="big-icon" id="finalIcon">💝</span>
+        <h2 id="finalTitle">Te amo, Elizabeth</h2>
+        <p id="finalText">Hoy y siempre, mamá. Gracias por ser mi hogar, mi refugio y mi más grande amor. Eres la mejor madre del universo. Feliz Día de las Madres.</p>
+        <button class="btn-love" onclick="lanzarConfeti()">🎉 Haz clic para celebrar</button>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="footer">
+    Hecho con todo el amor del mundo para ti, mamá Elizabeth ❤️
+</footer>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+// ========== LOADER ==========
+const loaderTL = gsap.timeline({ defaults: { ease: 'power2.out' } });
+
+loaderTL.to('#loaderBar', {
+    width: '100%',
+    duration: 2.2,
+    ease: 'power2.inOut',
+    onUpdate: function() {
+        const pct = Math.round(this.progress() * 100);
+        document.getElementById('loaderPct').textContent = pct + '%';
+    }
+})
+.to('#loader .logo', { scale: 1.2, duration: 0.3, yoyo: true, repeat: 1 }, 0)
+.to('#loader', { opacity: 0, duration: 0.6, ease: 'power2.inOut' }, 2.4)
+.set('#loader', { visibility: 'hidden', pointerEvents: 'none' });
+
+// ========== HERO ANIMATIONS ==========
+const heroTL = gsap.timeline({ delay: 3.1 });
+
+heroTL
+    .from('#heroSmall', { y: 40, opacity: 0, duration: 0.8, ease: 'power3.out' })
+    .from('#heroTitle', { y: '100%', duration: 1, ease: 'power4.out' }, 0.2)
+    .from('#heroTitle2', { y: '100%', duration: 1, ease: 'power4.out' }, 0.45)
+    .from('#heroSub', { y: '100%', duration: 0.9, ease: 'power3.out' }, 0.8)
+    .from('#heroIcon', { y: 30, opacity: 0, scale: 0.5, duration: 0.7, ease: 'back.out(1.7)' }, 1.3)
+    .from('#scrollIndicator', { y: 20, opacity: 0, duration: 0.6 }, 1.6)
+    .to('#heroIcon', { y: -12, duration: 1.5, ease: 'sine.inOut', yoyo: true, repeat: -1 }, 2.2)
+    .to('#scrollIndicator', { y: 8, duration: 1.2, ease: 'sine.inOut', yoyo: true, repeat: -1 }, 2.2);
+
+// Hero background gradient animation
+gsap.to('.hero', {
+    backgroundPosition: '100% 50%',
+    duration: 10,
+    ease: 'sine.inOut',
+    yoyo: true,
+    repeat: -1
+});
+
+// ========== FLOATING ELEMENTS with GSAP ==========
+const floats = ['❤️','💖','💗','🌹','🌸','💐','🌺','🌷','✨'];
+function createFloat() {
+    const el = document.createElement('div');
+    el.className = 'floating-el';
+    el.textContent = floats[Math.floor(Math.random() * floats.length)];
+    el.style.left = Math.random() * 100 + 'vw';
+    el.style.top = '110vh';
+    el.style.fontSize = (Math.random() * 18 + 14) + 'px';
+    document.body.appendChild(el);
+
+    gsap.to(el, {
+        y: -120 - Math.random() * 30 + 'vh',
+        x: (Math.random() - 0.5) * 200,
+        rotation: 720 + Math.random() * 360,
+        scale: 0.2 + Math.random() * 0.3,
+        opacity: 0,
+        duration: 10 + Math.random() * 8,
+        ease: 'none',
+        onComplete: () => el.remove()
+    });
+}
+setInterval(createFloat, 350);
+
+// ========== SCROLL-TRIGGERED ANIMATIONS ==========
+
+// Message section - clip reveal like the Spylt site
+function clipReveal(el, delay = 0) {
+    gsap.fromTo(el, {
+        clipPath: 'polygon(0 0, 0 0, 0 100%, 0% 100%)'
+    }, {
+        clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0% 100%)',
+        duration: 1.2,
+        delay: delay,
+        ease: 'power4.out',
+        scrollTrigger: {
+            trigger: el,
+            start: 'top 85%',
+            toggleActions: 'play none none none'
+        }
+    });
+}
+
+clipReveal('#msgLabel', 0);
+clipReveal('#msgTitle1', 0.15);
+clipReveal('#msgHighlight', 0.3);
+clipReveal('#msgTitle2', 0.45);
+clipReveal('#msgText', 0.6);
+
+// Qualities section - stagger cards
+gsap.from('#qlabel, #qtitle', {
+    y: 40,
+    opacity: 0,
+    duration: 0.8,
+    ease: 'power3.out',
+    stagger: 0.2,
+    scrollTrigger: {
+        trigger: '#qlabel',
+        start: 'top 85%',
+        toggleActions: 'play none none none'
+    }
+});
+
+gsap.from('.quality-card', {
+    y: 60,
+    opacity: 0,
+    scale: 0.9,
+    duration: 0.7,
+    stagger: 0.12,
+    ease: 'power3.out',
+    scrollTrigger: {
+        trigger: '#qualitiesGrid',
+        start: 'top 80%',
+        toggleActions: 'play none none none'
+    }
+});
+
+// Moments section
+gsap.from('#mlabel, #mtitle', {
+    y: 40,
+    opacity: 0,
+    duration: 0.8,
+    ease: 'power3.out',
+    stagger: 0.2,
+    scrollTrigger: {
+        trigger: '#mlabel',
+        start: 'top 85%',
+        toggleActions: 'play none none none'
+    }
+});
+
+gsap.from('.moment-item', {
+    y: 50,
+    opacity: 0,
+    scale: 0.85,
+    rotation: 10,
+    duration: 0.7,
+    stagger: 0.1,
+    ease: 'power3.out',
+    scrollTrigger: {
+        trigger: '#momentsGrid',
+        start: 'top 80%',
+        toggleActions: 'play none none none'
+    }
+});
+
+// Final section
+gsap.from('#finalIcon', {
+    scale: 0,
+    rotation: -180,
+    duration: 0.8,
+    ease: 'back.out(1.7)',
+    scrollTrigger: {
+        trigger: '#final',
+        start: 'top 85%',
+        toggleActions: 'play none none none'
+    }
+});
+
+gsap.from('#finalTitle, #finalText, .btn-love', {
+    y: 40,
+    opacity: 0,
+    duration: 0.8,
+    stagger: 0.2,
+    ease: 'power3.out',
+    scrollTrigger: {
+        trigger: '#finalTitle',
+        start: 'top 85%',
+        toggleActions: 'play none none none'
+    }
+});
+
+// Footer
+gsap.from('#footer', {
+    y: 20,
+    opacity: 0,
+    duration: 0.6,
+    scrollTrigger: {
+        trigger: '#footer',
+        start: 'top 95%',
+        toggleActions: 'play none none none'
+    }
+});
+
+// ========== CONFETTI ==========
+function lanzarConfeti() {
+    const colores = ['#e91e63','#f06292','#ff4081','#ff80ab','#f48fb1','#ffd54f','#ffab40','#c2185b','#fff176'];
+    for (let i = 0; i < 100; i++) {
+        const piece = document.createElement('div');
+        piece.className = 'confetti-piece';
+        piece.style.left = Math.random() * 100 + 'vw';
+        piece.style.background = colores[Math.floor(Math.random() * colores.length)];
+        piece.style.width = (Math.random() * 8 + 4) + 'px';
+        piece.style.height = (Math.random() * 8 + 4) + 'px';
+        piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+        piece.style.animationDuration = (Math.random() * 3 + 2) + 's';
+        piece.style.animationDelay = (Math.random() * 0.6) + 's';
+        document.body.appendChild(piece);
+        setTimeout(() => piece.remove(), 5000);
+    }
+}
+
+// Auto confeti after loader
+setTimeout(lanzarConfeti, 3500);
+</script>
+</body>
+</html>
